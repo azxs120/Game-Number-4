@@ -10,6 +10,9 @@ public class MoveBall : MonoBehaviour
     public GameObject winText;
     bool jump = false;
     float horizontalMove = 0f;
+    public Transform t;
+    public GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,10 @@ public class MoveBall : MonoBehaviour
             rb.AddForce(Vector3.up * 850);
             jump = true;
         }
+
+        if (t.transform.position.y <= -30)
+            gameManager.CompleteLevel();
+
 
 
         if (Input.GetKeyDown(KeyCode.R))
