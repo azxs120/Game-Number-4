@@ -18,6 +18,7 @@ public class CharacterController : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	public GameOverScreen GameOverScreen; 
 
 	[Header("Events")]
 	[Space]
@@ -41,24 +42,24 @@ public class CharacterController : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 	}
 
-	private void FixedUpdate()
-	{
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
+	//private void FixedUpdate()
+	//{
+	//	bool wasGrounded = m_Grounded;
+	//	m_Grounded = false;
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-				if (!wasGrounded)
-					OnLandEvent.Invoke();
-			}
-		}
-	}
+	//	Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+	//	for (int i = 0; i < colliders.Length; i++)
+	//	{
+	//		if (colliders[i].gameObject != gameObject)
+	//		{
+	//			m_Grounded = true;
+	//			if (!wasGrounded)
+	//				OnLandEvent.Invoke();
+	//		}
+	//	}
+	//}
 
 
 	public void Move(float move, bool crouch, bool jump)
@@ -141,4 +142,10 @@ public class CharacterController : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+	public void GameOver()
+    {
+		//if the player loose
+		GameOverScreen.Setup();
+    }
 }
