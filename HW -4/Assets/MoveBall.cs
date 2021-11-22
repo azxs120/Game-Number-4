@@ -17,6 +17,7 @@ public class MoveBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CoinPicker.coin = 0;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -32,10 +33,7 @@ public class MoveBall : MonoBehaviour
         if (t.transform.position.y <= -30)
             gameManager.CompleteLevel();
 
-
-
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene("level 2");
+        
 
         float hMove = Input.GetAxis("Horizontal");
         float vMove = Input.GetAxis("Vertical");
